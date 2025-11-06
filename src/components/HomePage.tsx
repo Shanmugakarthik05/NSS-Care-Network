@@ -51,10 +51,10 @@ export function HomePage({ onNavigate }: HomePageProps) {
     },
     {
       icon: AlertCircle,
-      title: "Emergency Help",
-      description: "Request immediate assistance",
-      color: "#F59E0B",
-      action: "emergency-help",
+      title: "Disaster Relief",
+      description: "Emergency response & public service",
+      color: "#E63946",
+      action: "disaster-relief",
     },
     {
       icon: Users,

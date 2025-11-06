@@ -17,6 +17,7 @@ import {
   AlertCircle,
   Camera,
   Upload,
+  Target,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
@@ -30,6 +31,8 @@ import { volunteersApi, campsApi, bloodRequestsApi } from "../utils/api";
 import { toast } from "sonner@2.0.3";
 import { DigitalIDCard } from "./DigitalIDCard";
 import { VolunteerChat } from "./VolunteerChat";
+import { VolunteerRecognition } from "./VolunteerRecognition";
+import { VolunteerAssignments } from "./VolunteerAssignments";
 import { motion } from "motion/react";
 import defaultVolunteerPhoto from "figma:asset/ee35148de1070cc99441b36009f709990981e8df.png";
 
@@ -48,6 +51,7 @@ export function VolunteerDashboard({ activeTab = "home" }: VolunteerDashboardPro
     eventsParticipated: 0,
     bloodDonations: 0,
     peopleHelped: 0,
+    points: 0,
   });
   const profilePhotoInputRef = useRef<HTMLInputElement>(null);
   const [profilePhoto, setProfilePhoto] = useState<string>(() => {
@@ -117,6 +121,7 @@ export function VolunteerDashboard({ activeTab = "home" }: VolunteerDashboardPro
         eventsParticipated: 23,
         bloodDonations: 4,
         peopleHelped: 156,
+        points: 1270,
       });
 
       // Mock recent activities
@@ -214,6 +219,8 @@ export function VolunteerDashboard({ activeTab = "home" }: VolunteerDashboardPro
       <Tabs value={activeTab} className="w-full">
         <TabsList className="hidden">
           <TabsTrigger value="home">Overview</TabsTrigger>
+          <TabsTrigger value="assignments">My Assignments</TabsTrigger>
+          <TabsTrigger value="recognition">Recognition</TabsTrigger>
           <TabsTrigger value="digital-id">Digital ID</TabsTrigger>
           <TabsTrigger value="chat">Chat</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -761,6 +768,36 @@ export function VolunteerDashboard({ activeTab = "home" }: VolunteerDashboardPro
               </Card>
             </div>
           </div>
+        </TabsContent>
+
+        {/* My Assignments Tab */}
+        <TabsContent value="assignments" className="space-y-6">
+          <div>
+            <h2 className="text-2xl mb-2">My Camp Assignments</h2>
+            <p className="text-gray-600">
+              View camps assigned to you by your college admin and mark your attendance
+            </p>
+          </div>
+          <VolunteerAssignments
+            volunteerId={currentVolunteer.id}
+            volunteerName={currentVolunteer.name}
+            college={currentVolunteer.college}
+          />
+        </TabsContent>
+
+        {/* Recognition Tab */}
+        <TabsContent value="recognition" className="space-y-6">
+          <div>
+            <h2 className="text-2xl mb-2">Recognition & Achievements</h2>
+            <p className="text-gray-600">
+              Track your volunteer journey and earn recognition for your service
+            </p>
+          </div>
+          <VolunteerRecognition
+            hoursServed={stats.hoursLogged}
+            campsAttended={stats.eventsParticipated}
+            points={stats.points}
+          />
         </TabsContent>
       </Tabs>
     </div>

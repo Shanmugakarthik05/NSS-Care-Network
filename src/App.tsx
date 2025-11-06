@@ -5,6 +5,7 @@ import { BloodDonorFinder } from "./components/BloodDonorFinder";
 import { HealthCamps } from "./components/HealthCamps";
 import { CampDetails } from "./components/CampDetails";
 import { EmergencyHelpRequest } from "./components/EmergencyHelpRequest";
+import { DisasterReliefModule } from "./components/DisasterReliefModule";
 import { LoginRegister } from "./components/LoginRegister";
 import { DashboardLayout } from "./components/DashboardLayout";
 import { PublicDashboard } from "./components/PublicDashboard";
@@ -18,14 +19,15 @@ import { Toaster } from "./components/ui/sonner";
 import { toast } from "sonner@2.0.3";
 import { initSampleData } from "./utils/api";
 import { Button } from "./components/ui/button";
-import { Database } from "lucide-react";
+import { Database, CheckCircle } from "lucide-react";
 
 type Page = 
   | "home" 
   | "blood-finder" 
   | "health-camps" 
   | "camp-details" 
-  | "emergency-help" 
+  | "emergency-help"
+  | "disaster-relief"
   | "login"
   | "dashboard";
 
@@ -43,12 +45,14 @@ export default function App() {
     setInitializing(true);
     try {
       await initSampleData();
-      toast.success("Sample data initialized successfully!");
+      toast.success("Sample data initialized in Supabase successfully!", {
+        description: "Your database is now ready with sample donors, camps, and missions.",
+      });
       setShowInitButton(false);
       localStorage.setItem("nss-data-initialized", "true");
     } catch (error) {
       console.error("Error initializing data:", error);
-      toast.error("Failed to initialize data. Please try again.");
+      toast.error("Failed to initialize data. Please check your Supabase connection.");
     } finally {
       setInitializing(false);
     }
@@ -109,6 +113,7 @@ export default function App() {
 
     return (
       <>
+        <MockDataBanner />
         <DashboardLayout
           userType={userType}
           onLogout={handleLogout}
@@ -127,16 +132,26 @@ export default function App() {
     <div className="min-h-screen bg-white">
       <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
       
-      {/* Initialize Data Button */}
+      {/* Initialize Data Button - Only shows once */}
       {showInitButton && (
         <div className="fixed bottom-6 right-6 z-50">
           <Button
             onClick={handleInitData}
             disabled={initializing}
-            className="bg-[#8B5CF6] hover:bg-[#7C3AED] shadow-lg"
+            className="bg-gradient-to-r from-[#E63946] to-[#0077B6] hover:opacity-90 shadow-lg text-white"
+            size="lg"
           >
-            <Database className="w-4 h-4 mr-2" />
-            {initializing ? "Initializing..." : "Initialize Sample Data"}
+            {initializing ? (
+              <>
+                <Database className="w-5 h-5 mr-2 animate-spin" />
+                Initializing Database...
+              </>
+            ) : (
+              <>
+                <Database className="w-5 h-5 mr-2" />
+                Initialize Sample Data
+              </>
+            )}
           </Button>
         </div>
       )}
@@ -155,6 +170,8 @@ export default function App() {
       )}
       
       {currentPage === "emergency-help" && <EmergencyHelpRequest />}
+      
+      {currentPage === "disaster-relief" && <DisasterReliefModule userType={userType} />}
       
       {currentPage === "login" && <LoginRegister onLogin={handleLogin} />}
       

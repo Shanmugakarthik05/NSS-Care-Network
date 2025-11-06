@@ -1,7 +1,7 @@
 
-  # Access Project Link
+  # NSS Care Network
 
-  This is a code bundle for Access Project Link. The original project is available at https://www.figma.com/design/mMQZya47M9hhZt4ZhUxfm3/Access-Project-Link.
+  This is a code bundle for NSS Care Network. The original project is available at https://www.figma.com/design/mMQZya47M9hhZt4ZhUxfm3/NSS-Care-Network.
 
   ## Running the code
 

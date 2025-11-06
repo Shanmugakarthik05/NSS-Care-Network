@@ -18,7 +18,8 @@ import {
   CheckCircle,
   Bell,
   Shield,
-  Building2
+  Building2,
+  UserPlus
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
@@ -31,6 +32,7 @@ import { toast } from "sonner@2.0.3";
 import { AddDonorDialog } from "./AddDonorDialog";
 import { CreateCampDialog } from "./CreateCampDialog";
 import { AddVolunteerDialog } from "./AddVolunteerDialog";
+import { AssignVolunteersDialog } from "./AssignVolunteersDialog";
 import { motion } from "motion/react";
 
 interface CollegeDashboardProps {

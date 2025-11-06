@@ -15,6 +15,7 @@ export function Navbar({ onNavigate, currentPage }: NavbarProps) {
     { name: "Find Blood", path: "blood-finder" },
     { name: "Health Camps", path: "health-camps" },
     { name: "Emergency Help", path: "emergency-help" },
+    { name: "Disaster Relief", path: "disaster-relief" },
   ];
 
   return (
