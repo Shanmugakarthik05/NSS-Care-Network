@@ -26,7 +26,6 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, R
 import { statsApi, campsApi, donorsApi, volunteersApi, helpRequestsApi } from "../utils/api";
 import { toast } from "sonner@2.0.3";
 import { motion } from "motion/react";
-import { BackendStatus } from "./BackendStatus";
 
 interface SuperAdminDashboardProps {
   activeTab: string;
@@ -299,9 +298,6 @@ export function SuperAdminDashboard({ activeTab }: SuperAdminDashboardProps) {
             </Button>
           </div>
         </div>
-
-        {/* Backend Status */}
-        <BackendStatus />
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

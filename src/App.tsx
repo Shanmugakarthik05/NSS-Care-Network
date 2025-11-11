@@ -113,7 +113,6 @@ export default function App() {
 
     return (
       <>
-        <MockDataBanner />
         <DashboardLayout
           userType={userType}
           onLogout={handleLogout}
